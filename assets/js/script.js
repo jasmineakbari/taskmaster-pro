@@ -3,9 +3,11 @@ var tasks = {};
 var createTask = function(taskText, taskDate, taskList) {
   // create elements that make up a task item
   var taskLi = $("<li>").addClass("list-group-item");
+
   var taskSpan = $("<span>")
     .addClass("badge badge-primary badge-pill")
     .text(taskDate);
+
   var taskP = $("<p>")
     .addClass("m-1")
     .text(taskText);
@@ -33,7 +35,6 @@ var loadTasks = function() {
 
   // loop over object properties
   $.each(tasks, function(list, arr) {
-    console.log(list, arr);
     // then loop over sub-array
     arr.forEach(function(task) {
       createTask(task.text, task.date, list);
@@ -45,7 +46,52 @@ var saveTasks = function() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 };
 
+$(".list-group").on("click", "p", function() {
+  // refers to p text
+  var text = $(this) 
+    .text()
+    .trim();
+  // creates a text area over the p
+  var textInput = $("<textarea>")
+  .addClass("form-control")
+  .val(text);
+  // replaces current p text with new text
+  $(this).replaceWith(textInput);
+  // highlights textarea content to draw focus
+  textInput.trigger("focus");
 
+  // Event listener to Save any text after text area is reverted out of focus or
+  // blurred
+  $(".list-group").on("blur", "textarea", function() {
+    // get the textarea's current value/text
+    var text = $(this)
+    .val()
+    .trim();
+
+    // get the parent ul's id attribute
+    var status = $(this)
+    .closest(".list-group")
+    .attr("id")
+    .replace("list-", "");
+
+    // get the task's postion in the list of other li elements
+    var index = $(this)
+    .closest(".list-group-item")
+    .index();
+    // refers to tasks object and returns the status of the task and given index
+    // in the array
+    tasks[status][index].text = text;
+    saveTasks();
+
+    //recreate p element
+    var taskP = $("<p>")
+      .addClass("m-1")
+      .text(text);
+
+    //replace textarea with p element
+    $(this).replaceWith(taskP);
+  })
+});
 
 
 // modal was triggered
