@@ -225,6 +225,19 @@ $(".card .list-group").sortable({
   }
 })
 
+// function to delete one task at a time
+$("#trash").droppable({
+  accept: ".card .list-group-item",
+  tolerance: "touch",
+  drop: function(event, ui) {
+    ui.draggable.remove();
+  },
+  over: function(event, ui) {
+  },
+  out: function(event, ui) {
+  }
+});
+
 // remove all tasks
 $("#remove-tasks").on("click", function() {
   for (var key in tasks) {
