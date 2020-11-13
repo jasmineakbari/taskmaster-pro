@@ -274,6 +274,13 @@ $("#modalDueDate").datepicker({
   minDate: 1
 });
 
+// automatically updates tasks every 5 seconds in case browser is kep open over days
+setInterval(function () {
+  $(".card .list-group-item").each(function(index, el) {
+    auditTask(el);
+  });
+}, 1800000);
+
 // load tasks for the first time
 loadTasks();
 
