@@ -133,7 +133,7 @@ $(".list-group").on("click", "span", function() {
 
   // enable jquery ui datepicker
   dateInput.datepicker({
-    minDate: 1,
+    minDate: 0,
     onClose: function() {
       $(this).trigger("change");
     }
@@ -280,7 +280,7 @@ $("#remove-tasks").on("click", function() {
 
 // adding date picker to Modal for adding task
 $("#modalDueDate").datepicker({
-  minDate: 1
+  minDate: 0
 });
 
 // automatically updates tasks every 5 seconds in case browser is kep open over days
