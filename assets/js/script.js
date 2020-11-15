@@ -133,7 +133,7 @@ $(".list-group").on("click", "span", function() {
 
   // enable jquery ui datepicker
   dateInput.datepicker({
-    minDate: 1,
+    minDate: 0,
     onClose: function() {
       $(this).trigger("change");
     }
