@@ -280,7 +280,7 @@ $("#remove-tasks").on("click", function() {
 
 // adding date picker to Modal for adding task
 $("#modalDueDate").datepicker({
-  minDate: 1
+  minDate: 0
 });
 
 // automatically updates tasks every 5 seconds in case browser is kep open over days
